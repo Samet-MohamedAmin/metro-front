@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Coords } from '../models/coords';
 import { CoordsService } from './coords.service';
-import { timer } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +19,17 @@ export class GeolocationService {
   positionCallback: PositionCallback = (position: Position) => {
 
     console.log(position);
-
     const coordinates: Coordinates = position.coords;
 
     const coords: Coords = {
+      userId: this.auth.id,
       lat: coordinates.latitude,
       lon: coordinates.longitude,
-      acc: coordinates.accuracy
+      acc: coordinates.accuracy,
+      timestamp: position.timestamp
     }
 
-    console.log('coords: ')
-    console.log(coords)
     this.coordsService.save(coords).subscribe(theCoords => console.log(theCoords))
-    this.coordsService.getAll().subscribe(theCoords => console.log(theCoords))
   }
 
   positionErrorCallback: PositionErrorCallback = (error: PositionError) => {
@@ -39,7 +37,7 @@ export class GeolocationService {
     console.log(error)
   }
 
-  constructor(private coordsService: CoordsService) {
+  constructor(private coordsService: CoordsService, private auth: AuthService) {
     this.refreshLocaition()
   }
 
@@ -47,6 +45,7 @@ export class GeolocationService {
 
     this.geolocation = navigator.geolocation
   }
+
   updatePosition() {
     
     setInterval(() => {
@@ -56,8 +55,6 @@ export class GeolocationService {
         this.positionErrorCallback,
         this.options)
       
-      console.log('coordsService.getAll():')
-      this.coordsService.getAll().subscribe(coordsList => {console.log(coordsList)});
     }, 5000);
   }
 

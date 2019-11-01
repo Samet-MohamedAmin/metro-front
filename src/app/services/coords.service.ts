@@ -18,7 +18,6 @@ export class CoordsService {
   }
 
   save(coords: Coords) {
-    console.log('save coords')
     return this.http.post(this.url, coords)
   }
 
