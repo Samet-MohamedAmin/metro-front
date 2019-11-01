@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BACKEND: 'http://localhost:3000/api'
+  BACKEND: 'http://localhost:3000/api',
+  DEFAULT_USER: 'unknown'
 };
 
 /*
