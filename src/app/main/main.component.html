@@ -1,1 +1,8 @@
-<p>sending data...</p>
+<p>user {{getUserId()}} - sending data...</p>
+<h3>Data Count: {{getDataCount()}}</h3>
+
+<input placeholder="{{getUserId()}}"
+        (keyup.enter)="updateUserId(userIdInput.value)"
+        style="margin-right: 20px"
+        #userIdInput>
+<button (click)="updateUserId(userIdInput.value)">update id</button>
