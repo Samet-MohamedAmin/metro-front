@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "metro",
+      "public": "dist/metro",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

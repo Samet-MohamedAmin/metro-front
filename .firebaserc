@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "metro-track": {
+      "hosting": {
+        "metro": [
+          "metro-track"
+        ]
+      }
+    }
+  }
+}
