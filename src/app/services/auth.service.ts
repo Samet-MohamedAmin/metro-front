@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private router: Router) { }
 
   set id(value: string) {
-    this._id = value;
+    this._id = value.toLowerCase();
   }
 
   get id(): string {
