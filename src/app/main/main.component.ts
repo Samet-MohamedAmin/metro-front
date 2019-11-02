@@ -39,4 +39,8 @@ export class MainComponent implements OnInit {
   getUserId():string {
     return this.auth.id
   }
+
+  getLastAcc(): number {
+    return this.geolocation.lastAcc;
+  }
 }

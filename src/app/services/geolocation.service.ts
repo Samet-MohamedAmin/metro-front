@@ -8,6 +8,12 @@ import { AuthService } from './auth.service';
 })
 export class GeolocationService {
 
+  private _lastAcc: number;
+
+  public get lastAcc(): number {
+    return this._lastAcc;
+  }
+
   options : PositionOptions = {
     enableHighAccuracy: true,
     timeout: 15000,
@@ -29,6 +35,8 @@ export class GeolocationService {
       timestamp: position.timestamp
     }
 
+    this._lastAcc = coordinates.accuracy;
+
     this.coordsService.save(coords).subscribe(theCoords => console.log(theCoords))
   }
 
@@ -49,12 +57,10 @@ export class GeolocationService {
   updatePosition() {
     
     setInterval(() => {
-
       this.geolocation.getCurrentPosition(
         this.positionCallback,
         this.positionErrorCallback,
         this.options)
-      
     }, 5000);
   }
 
